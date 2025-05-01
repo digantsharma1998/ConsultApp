@@ -90,7 +90,6 @@ class ResumeReviewList(generics.ListAPIView):
         resume = get_object_or_404(UserResume, pk=self.kwargs['resume_id'])
         return ResumeReview.objects.filter(resume=resume)
 
-# views.py
 class UserResumeViewSet(viewsets.ModelViewSet):
     queryset = UserResume.objects.all()
     serializer_class = UserResumeSerializer
