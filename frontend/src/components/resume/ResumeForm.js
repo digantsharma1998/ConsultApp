@@ -8,7 +8,7 @@ import {
   Step,
   StepLabel,
   Divider,
-  Chip,
+//   Chip,
   IconButton,
   Paper
 } from '@mui/material';
@@ -92,29 +92,29 @@ const ResumeForm = ({ resumeData, onChange }) => {
   };
 
   // Similar handlers for education, skills, projects
-  const handleAddEducation = () => {
-    setFormData(prev => ({
-      ...prev,
-      education: [
-        ...prev.education,
-        {
-          id: Date.now(),
-          institution: '',
-          degree: '',
-          fieldOfStudy: '',
-          startDate: '',
-          endDate: ''
-        }
-      ]
-    }));
-  };
+//   const handleAddEducation = () => {
+//     setFormData(prev => ({
+//       ...prev,
+//       education: [
+//         ...prev.education,
+//         {
+//           id: Date.now(),
+//           institution: '',
+//           degree: '',
+//           fieldOfStudy: '',
+//           startDate: '',
+//           endDate: ''
+//         }
+//       ]
+//     }));
+//   };
 
-  const handleAddSkill = () => {
-    setFormData(prev => ({
-      ...prev,
-      skills: [...prev.skills, { id: Date.now(), name: '', level: 'Intermediate' }]
-    }));
-  };
+//   const handleAddSkill = () => {
+//     setFormData(prev => ({
+//       ...prev,
+//       skills: [...prev.skills, { id: Date.now(), name: '', level: 'Intermediate' }]
+//     }));
+//   };
 
   const handleSubmit = () => {
     dispatch(saveResume(formData))

@@ -7,7 +7,7 @@ import TemplateSelector from '../../components/resume/TemplateSelector';
 
 const ResumeBuilderPage = () => {
   const dispatch = useDispatch();
-  const { templates, resumes, loading, error } = useSelector((state) => state.resume);
+  const { templates, loading, error } = useSelector((state) => state.resume);
   const { currentResume } = useSelector((state) => state.resume);
   const handleTemplateSelect = (template) => {
     console.log('Selected template:', template);
