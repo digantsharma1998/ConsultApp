@@ -1,4 +1,5 @@
 import axios from "axios";
+import { createAsyncThunk } from '@reduxjs/toolkit';
 
 const API_URL = 'http://localhost:8000/api';
 
@@ -87,3 +88,21 @@ export const createResumeReview = async (resumeId, reviewData) => {
         throw error.response.data;
     }
 };
+
+export const saveResume = createAsyncThunk(
+    'resume/saveResume',
+    async (resumeData, { rejectWithValue }) => {
+      try {
+        const url = resumeData.id 
+          ? `${API_URL}/resumes/${resumeData.id}/` 
+          : `${API_URL}/resumes/`;
+        
+        const method = resumeData.id ? 'put' : 'post';
+        
+        const response = await axios[method](url, resumeData, getAuthHeaders());
+        return response.data;
+      } catch (error) {
+        return rejectWithValue(error.response.data);
+      }
+    }
+  );
