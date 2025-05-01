@@ -5,7 +5,8 @@ from django.shortcuts import(
 from rest_framework import(
             generics,
             permissions,
-            status
+            status,
+            viewsets
 )
 from rest_framework.response import Response
 from rest_framework.authtoken.views import ObtainAuthToken
@@ -88,3 +89,11 @@ class ResumeReviewList(generics.ListAPIView):
     def get_queryset(self):
         resume = get_object_or_404(UserResume, pk=self.kwargs['resume_id'])
         return ResumeReview.objects.filter(resume=resume)
+
+class UserResumeViewSet(viewsets.ModelViewSet):
+    queryset = UserResume.objects.all()
+    serializer_class = UserResumeSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)

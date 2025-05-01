@@ -8,6 +8,7 @@ import TemplateSelector from '../../components/resume/TemplateSelector';
 const ResumeBuilderPage = () => {
   const dispatch = useDispatch();
   const { templates, resumes, loading, error } = useSelector((state) => state.resume);
+  const { currentResume } = useSelector((state) => state.resume);
 
   useEffect(() => {
     dispatch(getTemplates());
@@ -22,6 +23,10 @@ const ResumeBuilderPage = () => {
       <Typography variant="h4" gutterBottom>
         Resume Builder
       </Typography>
+      <Typography vaiant="h4" gutterBottom>
+        {currentResume ? 'Edit Resume' : 'Create New Resume'}
+      </Typography>
+      <ResumeForm resumeData={currentResume} />
       <Grid container spacing={3}>
         <Grid item xs={12} md={4}>
           <TemplateSelector templates={templates} />
