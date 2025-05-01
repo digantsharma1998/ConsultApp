@@ -9,6 +9,10 @@ const ResumeBuilderPage = () => {
   const dispatch = useDispatch();
   const { templates, resumes, loading, error } = useSelector((state) => state.resume);
   const { currentResume } = useSelector((state) => state.resume);
+  const handleTemplateSelect = (template) => {
+    console.log('Selected template:', template);
+    // You can also update your form state here if needed
+  }; 
 
   useEffect(() => {
     dispatch(getTemplates());
@@ -36,6 +40,8 @@ const ResumeBuilderPage = () => {
           {/* Resume Preview Component would go here */}
         </Grid>
       </Grid>
+      <TemplateSelector onSelect={handleTemplateSelect} />
+      {}
     </Container>
   );
 };

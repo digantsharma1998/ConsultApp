@@ -12,14 +12,17 @@ const getAuthHeaders = () => {
     };
 };
 
-export const getTemplates = async () => {
-    try{
+export const getTemplates = createAsyncThunk(
+    'resume/getTemplates',
+    async (_, { rejectWithValue }) => {
+      try {
         const response = await axios.get(`${API_URL}/templates/`);
         return response.data;
-    } catch(error){
-        throw error.response.data;
+      } catch (error) {
+        return rejectWithValue(error.response.data);
+      }
     }
-};
+  );
 
 export const getResumes = async () => {
     try{
@@ -100,6 +103,22 @@ export const saveResume = createAsyncThunk(
         const method = resumeData.id ? 'put' : 'post';
         
         const response = await axios[method](url, resumeData, getAuthHeaders());
+        return response.data;
+      } catch (error) {
+        return rejectWithValue(error.response.data);
+      }
+    }
+  );
+
+  export const selectTemplate = createAsyncThunk(
+    'resume/selectTemplate',
+    async (templateId, { rejectWithValue }) => {
+      try {
+        const response = await axios.post(
+          `${API_URL}/resumes/select-template/`,
+          { template_id: templateId },
+          getAuthHeaders()
+        );
         return response.data;
       } catch (error) {
         return rejectWithValue(error.response.data);

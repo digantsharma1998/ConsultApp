@@ -15,13 +15,13 @@ from rest_framework.decorators import api_view
 from .models import(
             ResumeTemplate,
             UserResume,
-            ResumeReview
+            ResumeReview,
 )
 from .serializers import(
     ResumeTemplateSerializer,
     UserResumeSerializer,
     ResumeReviewSerializer,
-    UserSerializer
+    UserSerializer,
 )
 
 # Create your views here.
@@ -97,3 +97,24 @@ class UserResumeViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
+
+class SelectTemplateView(generics.GenericAPIView):
+    permission_classes = [permissions.IsAuthenticated]
+    
+    def post(self, request):
+        template_id = request.data.get('template_id')
+        try:
+            template = ResumeTemplate.objects.get(pk=template_id)
+            # Associate template with user's current resume
+            resume, _ = UserResume.objects.get_or_create(
+                user=request.user,
+                defaults={'template': template}
+            )
+            resume.template = template
+            resume.save()
+            return Response({'status': 'template selected'})
+        except ResumeTemplate.DoesNotExist:
+            return Response(
+                {'error': 'Template not found'},
+                status=status.HTTP_404_NOT_FOUND
+            )
