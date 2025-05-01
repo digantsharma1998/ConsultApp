@@ -1,0 +1,28 @@
+# Django
+*.pyc
+__pycache__/
+*.sqlite3
+.env
+db.sqlite3
+/media/
+
+# Node
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Build
+build/
+dist/
+/eslintcache
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swp
+
+# Environemnt files
+.env.local
+.env.development
+.env.production
