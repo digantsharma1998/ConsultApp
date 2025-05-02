@@ -30,7 +30,7 @@ SECRET_KEY = 'django-insecure--$joh5-l-6$7l#@ub^!vk@#ypey2kx26=$2dy-x_xa4_jj7r!9
 # DEBUG = os.getenv('DEBUG','True') == 'True'
 DEBUG = False
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'virtualcrafter.onrender.com']
 
 
 # Application definition
