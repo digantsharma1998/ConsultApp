@@ -11,7 +11,7 @@ def run_setup():
     call_command('migrate')
 
     User = get_user_model()
-    if not User.objects.filter(username='crafter').exists:
+    if not User.objects.filter(username='admin').exists:
         User.objects.create_superuser(
             username='crafter',
             email='crafter@visual.com',
