@@ -8,7 +8,7 @@ django.setup()
 def run_setup():
     call_command('migrate')
 
-    call_command('createsuperuse',
+    call_command('createsuperuser',
                  email='visual@example.com',
                  username='crafter',
                  interactive=False)
