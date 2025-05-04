@@ -13,8 +13,8 @@ def run_setup():
     User = get_user_model()
     if not User.objects.filter(username='admin').exists:
         User.objects.create_superuser(
-            username='crafter',
-            email='crafter@visual.com',
+            username='admin',
+            email='admin@example.com',
             password=make_password('Crafter@8')
         )
 
