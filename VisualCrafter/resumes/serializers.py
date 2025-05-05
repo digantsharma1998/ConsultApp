@@ -12,4 +12,4 @@ class ResumeTemplateSerializer(serializers.ModelSerializer):
     def get_thumbnail(self, obj):
         if obj.thumbnail:
             return self.context['request'].build_absolute_uri(obj.thumbnail.url)
-        return True
+        return None
