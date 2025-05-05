@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.utils.html import format_html
 from .models import(
             ResumeTemplate,
             UserResume
@@ -10,8 +11,10 @@ class ResumeTemplateAdmin(admin.ModelAdmin):
     readonly_fields = ('thumbnail_preview',)
 
     def thumbnail_preview(self, obj):
-        return obj.thumbnail.url if obj.thumbnail else ""
-    thumbnail_preview.short_description = 'Thumbnail_preview'
+        if obj.thumbnail:
+            return format_html('<img src="{}" width="100" />', obj.thumbnail.url)
+        return ""
+    thumbnail_preview.allow_tags = True
 
 @admin.register(UserResume)
 class UserResumeAdmin(admin.ModelAdmin):
