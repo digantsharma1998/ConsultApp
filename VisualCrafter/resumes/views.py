@@ -10,7 +10,7 @@ def resume_list(request):
 @api_view(['GET'])
 def template_list(request):
     try:
-        templates = ResumeTemplate.objects.all().values('id', 'name', 'is_premium', 'thumbnail')
+        templates = ResumeTemplate.objects.all()
         serializer = ResumeTemplateSerializer(templates, many=True, context={'request': request})
         return Response(serializer.data)
     except Exception as e:
